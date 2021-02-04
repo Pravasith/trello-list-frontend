@@ -1,0 +1,77 @@
+// flex-row -centre mixin:
+@import "./_vars";
+// @import url('https://db.onlinewebfonts.com/c/30a71dcf9a1c39558ca4e97c92a4b2fa?family=Noe+Display+Bold');
+
+
+
+
+@mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
+    &:after {
+      position: absolute;
+      content: "";
+      top: $y;
+      left: $x;
+      right: 0;
+      z-index: -1;
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
+      transform: scale($size);
+      -webkit-filter: blur($spread);
+      -moz-filter: blur($spread);
+      -ms-filter: blur($spread);
+      filter: blur($spread);
+      background: linear-gradient(270deg, $colorA, $colorB);
+      background-size: 200% 200%;
+      animation: animateGlow $duration ease infinite;
+      
+      @keyframes animateGlow {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+      }
+    }
+}
+  
+@mixin colorText($x, $y){
+
+    @keyframes textColor {
+        0% {
+          color: $x;
+        }
+        50% {
+          color: $y;
+        }
+        100% {
+          color: $x;
+        }
+    }
+
+    color: $x;
+    animation: textColor 10s ease infinite;
+
+}
+
+
+
+
+// FLEX MIXINS
+@mixin flexCentreRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexCentreCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@mixin blurredBackdrop{
+    background: $transparentWhite;
+    backdrop-filter: blur(0.5em);
+}
