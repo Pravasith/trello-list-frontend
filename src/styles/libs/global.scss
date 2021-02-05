@@ -42,16 +42,15 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: "Calibre", sans-serif;
-	line-height: 1.6;
-
-	// scroll-behavior: smooth;
+	scroll-behavior: smooth;
 
 }
 
 * {
 	box-sizing: border-box;
 	color: $pureWhite;
+	font-family: "Calibre", sans-serif;
+	font-weight: 350;
 }
 
 a {
@@ -66,7 +65,7 @@ a {
 }
 
 // nav a{
-// 	font-size: 1.05em;
+// 
 // 	font-weight: 500;
 // }
 
@@ -96,31 +95,26 @@ ul, ol {
 
 li{
 	list-style: none;
-	font-size: 1em;
+
 }
 
 h1{
 	// font-family: "Noe Display Bold", serif;
 	font-family: "Calibre", sans-serif;
-	font-size: 2.65em;
-	line-height: 1em;
+
+
 
 	margin: 0;
 	font-weight: 450;
 	color: $secondaryHighlight;
 
-	span{
-		// display: inline-block;
-	}
+
 
 }
 
 
 h2{
 	font-family: "Calibre", sans-serif;
-	
-	font-size: 1.25em;
-	line-height: 1.25em;
 	font-weight: 350;
 	// color: $secondaryHighlight;
 	margin: 0;
@@ -139,16 +133,16 @@ h3{
 	font-family: "Calibre", sans-serif;
 	margin: 0;
 	padding: 0;
-	font-size: 1em;
+
 	font-weight: 500;
-	line-height: 1.2em;
+
 	color: $pureWhite;
 }
 
 p{
 	font-family: "Calibre", sans-serif;
-	font-size: 1em;
-	line-height: 1.35em;
+
+
 	font-weight: 350;
 	margin: 0;
 	// color: $secondaryHighlight;
@@ -161,7 +155,7 @@ p{
 
 
 input{
-	font-size: 1.15em;
+
 
 }
 
@@ -200,51 +194,12 @@ input{
 // 
 @media screen and (min-width: 100px) and (max-width: 767px) and (orientation: portrait)  {
 
-  h1{
-    font-size: 1.65em;
-  }
-
-
-  h2{
-    font-size: 1.15em;
-	line-height: 1em;
-	font-weight: 600;
-  }
-
-//   nav a{
-// 	font-size: 1em;
-//   }
-
-  p{
-	font-size: 0.8em;
-    line-height: 1.2em;
-  }
-
 }
 
 
 
 @media screen and (min-width: 100px) and (max-width: 767px) and (orientation: landscape) {
-	h1{
-		// font-size: 1.65em;
-		font-size: 1.35em;
-	}
 
-
-	h2{
-		font-size: 1.15em;
-		line-height: 1em;
-		font-weight: 600;
-	}
-
-	// nav a{
-	// 	font-size: 1em;
-	// }
-
-	p{
-		font-size: 0.8em;
-		line-height: 1.2em;
-	}
 	
 }
 
@@ -252,45 +207,12 @@ input{
 
 // 
 @media screen and (min-width: 768px) and (max-width: 1023px)  and (orientation: portrait) {
-  h1{
-    font-size: 2.45em;
-  }
 
-  h2{
-    font-size: 1.85em;
-    // font-weight: 600;
-  }
-
-	// nav a{
-	// 	font-size: 1.25em;
-	// }
-
-  p{
-	font-size: 1.15em;
-    line-height: 1.1em;
-  }
 }
 
 
 @media screen and (min-width: 768px) and (max-width: 1023px)  and (orientation: landscape) {
-	h1{
-		font-size: 2.45em;
-	}
 
-	h2{
-		font-size: 1.85em;
-		// font-weight: 600;
-	}
-
-
-	// nav a{
-	// 	font-size: 1.25em;
-	// }
-
-	p{
-		font-size: 1.15em;
-		line-height: 1.1em;
-	}
 }
 
 
@@ -300,70 +222,16 @@ input{
 // 
 @media screen and (min-width: 1024px) and (max-width: 1151px)  and (orientation: portrait)  {
 
-
-  h1{
-    font-size: 3em;
-  }
-
-  h2{
-    font-size: 2.1em;
-	// font-weight: 600;
-	font-size: 2.3em;
-  }
-
-//   nav a{
-//     font-size: 1.45em;
-//   }
-
-
-
-  p{
-	font-size: 1.4em;
-    line-height: 1.2em;
-  }
 }
 
 
 @media screen and (min-width: 1024px) and (max-width: 1151px)  and (orientation: landscape)  {
-	h1{
-		font-size: 2.45em;
-	}
 
-	h2{
-		font-size: 1.85em;
-		// font-weight: 600;
-	}
-
-
-	// nav a{
-	// 	font-size: 1.25em;
-	// }
-
-	p{
-		font-size: 1.15em;
-		line-height: 1.1em;
-	}
 }
 
 
 // 
 @media screen and (min-width: 1152px) and (max-width: 1365px){
-
-  h2{
-    font-size: 1.5em;
-    line-height: 1em;
-  }
-
-  	input{
-		font-size: 1.25em;
-	}
-
-
-  p{
-    font-size: 1em;
-    // line-height: 1.2em;
-  }
-
 
 }
 
@@ -372,65 +240,17 @@ input{
 // 
 @media screen and (min-width: 1366px) and (max-width: 1439px){
 
-//   a{
-//     font-size: 1.25em;
-//   }
-	
-
-
 }
 
 
 // 
 @media screen and (min-width: 1440px) and (max-width: 1919px){
 
-	h2{
-		// font-size: 2em;
-		// line-height: 0.9em;
-	}
-
-	input{
-		font-size: 1.5em;
-	}
-
-
-	p{
-		// font-size: 1.4em;
-		font-size: 1.1em;
-		// line-height: 1.2em;
-		font-size: 1.175em;
-	}
-
 }
 
 
 
 @media screen and (min-width: 1920px) and (max-width: 6000px){
-	h1{
-		// line-height: 1em;
-		line-height: 0.95em;
-		font-size: 3em;
-	}
-
-	// nav a{
-	// 	font-size: 0.85em;
-	// }
-
-
-	h2{
-		font-size: 2em;
-		line-height: 1em;
-		
-	}
-
-	input{
-		font-size: 1.5em;
-	}
-
-	p{
-		// font-size: 1.4em;
-		font-size: 1.35em;
-	}
 
 }
 

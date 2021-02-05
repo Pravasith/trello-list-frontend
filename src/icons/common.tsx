@@ -55,4 +55,69 @@ export const TrelloLogo = () => (
         ></path>
       </g>
     </svg>
-  )
+)
+
+
+export const TickMark = () => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		x="0"
+		y="0"
+		enableBackground="new 0 0 27 27"
+		version="1.1"
+		viewBox="0 0 27 27"
+		xmlSpace="preserve"
+		>
+		<path
+		fill="none"
+		stroke="#FFF"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		strokeMiterlimit="10"
+		strokeWidth="3"
+		d="M10.3 14.7L12.8 17.2 18.7 11.3"
+		></path>
+	</svg>
+)
+
+
+export const TimeLeft = ({ intensity }: {intensity: 'high' | 'low' | 'none'}) => {
+
+
+	let color = {
+		high: '#ff1d25',
+		low: '#ffff00',
+		none: '#0071BC' 
+	}
+
+
+
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			x="0"
+			y="0"
+			enableBackground="new 0 0 21 21"
+			viewBox="0 0 21 21"
+			>
+			<circle
+				cx="10.5"
+				cy="10.5"
+				r="10"
+				fill={color[intensity]}
+				stroke="#FFF"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeMiterlimit="10"
+			></circle>
+			<path
+				fill="none"
+				stroke="#FFF"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeMiterlimit="10"
+				d="M10.5 3.1L10.5 10.5 14.7 13.7"
+			></path>
+		</svg>
+	)
+}

@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals'
 import 'react-datepicker/dist/react-datepicker.css'
 import './styles/date_picker.scss'
 
+import './styles/index.css'
+
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
