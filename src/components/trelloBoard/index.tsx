@@ -3,13 +3,15 @@ import styles from '../../styles/trello_board.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
+import { Card, IProps } from './interfaces'
 
 
-const Cards = () => {
+
+
+
+const Cards = ({ cardsList }: { cardsList: Card[] }) => {
 
     const cards = new Array(4).fill(null)
-
-
 
     return (
         <div className="cardiA">
@@ -42,7 +44,8 @@ const Cards = () => {
 }
 
 
-const TrelloBoard = () => {
+const TrelloBoard = (props: IProps) => {
+    
     return (
         <>
             <div className={`w-full h-full ${styles.container} ${utilStyles.flexCol_Centre}`}>
@@ -59,7 +62,7 @@ const TrelloBoard = () => {
                         <h2 className={`text-lg text-fl-blue font-medium`}>Todos</h2>
 
                         {
-                            <Cards/>
+                            <Cards cardsList={props.todos}/>
                         }
                     </div>
 
@@ -67,7 +70,7 @@ const TrelloBoard = () => {
                         <h2 className={`text-lg text-fl-blue font-medium`}>Todos</h2>
 
                         {
-                            <Cards/>
+                            <Cards cardsList={props.done}/>
                         }
                     </div>
                 </div>
