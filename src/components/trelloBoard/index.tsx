@@ -1,9 +1,11 @@
 
-import styles from '../../styles/trello_board.module.scss'
+import styles from './trello_board.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { AddNewTask, TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
 import { Card, IProps } from './interfaces'
+import { useState } from 'react'
+import Modal from '../modal'
 
 
 
@@ -50,9 +52,12 @@ const Cards = ({ cardsList }: { cardsList: Card[] }) => {
 
 
 const TrelloBoard = (props: IProps) => {
+
+    const [showModal, setShowModal] = useState(false)
     
     return (
         <>
+           
             <div className={`w-full h-full ${styles.container} ${utilStyles.flexCol_Centre}`}>
                 <div className={`${utilStyles.flexRow_Centre}`}>
                     <div className={`w-8 mr-2 mb-1`}>
@@ -67,7 +72,12 @@ const TrelloBoard = (props: IProps) => {
 
                         <div className={`mb-4 ${utilStyles.flexRow_Centre}`}>
                             <h2 className={`text-lg text-fl-blue font-medium`}>Todos</h2>
-                            <button className={`${utilStyles.roundSVGButton}`}><AddNewTask /></button>
+                            <button 
+                                className={`${utilStyles.roundSVGButton}`}
+                                onClick={() => setShowModal(true)}
+                                >
+                                <AddNewTask />
+                            </button>
                         </div>
 
                         <div className={`${styles.scrollWrap}`}>
@@ -97,6 +107,10 @@ const TrelloBoard = (props: IProps) => {
 
                 
             </div>
+
+            {
+                showModal && (<Modal closeModal={setShowModal} />)
+            }
         </>
     )
 }

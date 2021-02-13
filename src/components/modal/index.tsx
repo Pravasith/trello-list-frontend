@@ -1,0 +1,36 @@
+
+
+import React from 'react'
+import { CloseButton } from "../../icons/common"
+
+import utilStyles from '../../styles/libs/utils.module.scss'
+import styles from './modal.module.scss'
+
+const Modal = (props: { closeModal: React.Dispatch<React.SetStateAction<boolean>> }) => {
+    return (
+        <div className={`fixed top-0 left-0 w-full h-screen ${styles.container}`}>
+            <div className="relative w-full h-full">
+                <button
+                    className={`absolute top-0 right-0 w-10 h-10 m-6 ${utilStyles.roundSVGButton}`}
+                    onClick={() => props.closeModal(false)}
+                >
+                    <CloseButton />
+                </button>
+
+                <div className={`${styles.modalOuterWrap} flex justify-center items-center w-full h-full`}>
+                    <div className={`${styles.modalInnerWrap} flex justify-center items-center bg-white p-4 rounded-md`}>
+                        <h1 className="helloWorld">Hello </h1>
+                        <div className="trivagoLogo px-2 pb-1">
+                            {/* <TrivagoLogo/> */} HELLO
+                    </div>
+                        <h1 className="helloWorld">!</h1>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    )
+}
+
+export default Modal

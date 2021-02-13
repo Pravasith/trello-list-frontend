@@ -1,28 +1,35 @@
-@import './libs/vars';
-@import './libs/mixins';
+@import '../../styles/libs/vars';
+@import '../../styles/libs/mixins';
 
 .container{
 
+    background:#e3403d21;
+    backdrop-filter: blur(0.5em);
+    z-index: 5;
 
-    nav{
-        // justify-content: space-between;
-        width: 100%;
-        // background: yellow;
+    $dims: 400px;
 
-        padding: 0 5vw;
-        min-height: 12vh;
-
-        z-index: 2;
-        position: absolute;
-
-
+    .modalInnerWrap{
+        min-width: $dims;
+        min-height: $dims;
     }
 
-    .logo{
-        width: 120px;
+    .modalOuterWrap{
+       
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

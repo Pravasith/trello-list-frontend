@@ -1,6 +1,6 @@
 
 
-import styles from '../../styles/navbar.module.scss'
+import styles from './navbar.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { Logo } from '../../icons/common'
