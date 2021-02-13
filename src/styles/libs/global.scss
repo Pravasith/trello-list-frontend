@@ -31,11 +31,13 @@
     width: 2vh;  /* Remove scrollbar space */
 	background: transparent;  /* Optional: just make scrollbar invisible */
 	background: $transparentWhite;
+	border-radius: 10px;
 }
 
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: $darkGray;
+	border-radius: 10px;
 }
 
 html,

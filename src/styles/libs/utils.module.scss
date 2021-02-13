@@ -198,7 +198,8 @@
   
   padding: 0.1em;
 
-  $iconsHeight: 3.2em;
+
+  $iconsHeight: 2.75em;
 
   max-width: $iconsHeight;
   max-height: $iconsHeight;
@@ -219,10 +220,12 @@
 
   &:hover{
       border-color: $pureWhite;
+        outline: none;
   }
 
   &:focus{
       border-color: $highlightShade;
+        outline: none;
   }
 
   &:disabled{

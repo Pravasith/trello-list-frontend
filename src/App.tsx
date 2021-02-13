@@ -42,7 +42,72 @@ const data: IProps = {
 		{
 			type: 'TODO',
 			title: 'Make love',
-			id: 'todo-1',
+			id: 'todo-4',
+
+			dueDate: new Date(),
+			description: "You need to make love",
+		},
+		{
+			type: 'TODO',
+			title: 'Wash up',
+			id: 'todo-21',
+
+			dueDate: new Date(),
+			description: "You need to wash clothes",
+		},
+		{
+			type: 'TODO',
+			title: 'Eat cheese',
+			id: 'todo-22',
+
+			dueDate: new Date(),
+			description: "You need to eat cheese",
+		},
+		{
+			type: 'TODO',
+			title: 'Get up',
+			id: 'todo-23',
+
+			dueDate: new Date(),
+			description: "You need to get up",
+		},
+		{
+			type: 'TODO',
+			title: 'Make love',
+			id: 'todo-24',
+
+			dueDate: new Date(),
+			description: "You need to make love",
+		},
+
+		{
+			type: 'TODO',
+			title: 'Wash up',
+			id: 'todo-221',
+
+			dueDate: new Date(),
+			description: "You need to wash clothes",
+		},
+		{
+			type: 'TODO',
+			title: 'Eat cheese',
+			id: 'todo-222',
+
+			dueDate: new Date(),
+			description: "You need to eat cheese",
+		},
+		{
+			type: 'TODO',
+			title: 'Get up',
+			id: 'todo-223',
+
+			dueDate: new Date(),
+			description: "You need to get up",
+		},
+		{
+			type: 'TODO',
+			title: 'Make love',
+			id: 'todo-224',
 
 			dueDate: new Date(),
 			description: "You need to make love",
@@ -77,7 +142,7 @@ const data: IProps = {
 		{
 			type: 'DONE',
 			title: 'Sleep well',
-			id: 'done-1',
+			id: 'done-4',
 
 			dueDate: new Date(),
 			description: "You need to sleep well",

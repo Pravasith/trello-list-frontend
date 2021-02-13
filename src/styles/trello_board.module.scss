@@ -4,26 +4,57 @@
 .container{
 
     $trelloBlue: rgba(0, 113, 189, 0.452);
+    $trelloGreen: rgba(51, 255, 0, 0.252);
 
     .listItem{
         width: 220px;
     }
 
     .card{
-        filter: drop-shadow(2px 4px 6px $trelloBlue);
+        
         background: $intenseGray;
         cursor: pointer;
         transition: 0.2s;
 
         &:hover{
-            .listItem{
-                @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
-            }
+            // .listItem{
+            //     @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
+            // }
             
             h1, p{
                 color: $pureWhite;
             }
         }
+    }
+
+    .blueColor{
+        filter: drop-shadow(2px 4px 6px $trelloBlue);
+        &:hover{
+            // @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
+            filter: drop-shadow(0px 2px 8px $pureWhite);
+        }
+    }
+
+    .greenColor{
+        filter: drop-shadow(2px 4px 6px $trelloGreen);
+        &:hover{
+            // @include backlight(2px, 4px, 6px, 6px, #88ff00, #0fffc1, 3s);
+            filter: drop-shadow(0px 2px 8px $pureWhite);
+        }
+    }
+
+    .addTaskIcon{
+        width: 25px;
+    }
+
+    .scrollWrap{
+        overflow-y: auto;
+        max-height: 45vh;
+    }
+
+    .stick{
+        position: fixed;
+        z-index: 2;
     }
 }
 
