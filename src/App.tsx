@@ -1,7 +1,5 @@
 
 
-// import { useState } from 'react'
-// import DatePicker from 'react-datepicker'
 import Navbar from './components/navbar'
 
 import styles from './styles/app.module.scss'
@@ -152,7 +150,6 @@ const data: IProps = {
 
 const App = () => {
 
-	// const [startDate, setStartDate] = useState(new Date())
 
 
 	return (
@@ -160,10 +157,6 @@ const App = () => {
 			<header className="App-header">
 				<Navbar/>
 			</header>
-
-			{/* <div className={`${styles.datePick}`}>
-				<DatePicker selected={startDate} onChange={date => setStartDate(date as Date)}/>
-			</div> */}
 
 			<div className={`${styles.childrenBody} ${utilStyles.flexRow_Centre}`}>
 				<TrelloBoard { ...data } />

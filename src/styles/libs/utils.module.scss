@@ -213,19 +213,19 @@
   transition: 0.2s ease-out;
 
   svg{
-      width: 100%;
-      height: 100%;
+	  width: 100%;
+	  height: 100%;
   }
   
 
   &:hover{
-      border-color: $pureWhite;
-        outline: none;
+	  border-color: $pureWhite;
+		outline: none;
   }
 
   &:focus{
-      border-color: $highlightShade;
-        outline: none;
+	  border-color: $highlightShade;
+		outline: none;
   }
 
   &:disabled{
@@ -238,4 +238,21 @@
 
 
 
-  
+// INPUT
+
+.stockInput{
+	padding: 0.5em;
+	color: $intenseGray;
+	font-weight: 500;
+	margin: 0.5em 1em;
+	min-width: 20em;
+}
+
+.squareButton{
+	padding: 0.5em 1em 0.4em 1em;
+	margin: 1em;
+	background: $pureWhite;
+	color: $intenseGray;
+	font-weight: 500;
+	border-radius: 0.5em;
+}

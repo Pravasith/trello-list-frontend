@@ -81,13 +81,6 @@ const TrelloBoard = (props: IProps) => {
                         </div>
 
                         <div className={`${styles.scrollWrap}`}>
-                            
-                            {/* <div
-                                className={`rounded-md px-4 py-2 m-4 ${styles.card} ${styles.stick} ${styles.blueColor} ${utilStyles.flexRow_Centre}`}
-                                >
-                                <div className={`${styles.addTaskIcon}`}><AddNewTask /></div>
-                            </div> */}
-
                             {
                                 <Cards cardsList={ props.todos } />
                             }

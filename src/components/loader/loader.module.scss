@@ -1,0 +1,56 @@
+
+
+// EDIT THESE
+$ballColor1: #FFFFFF;
+$ballColor2 : #00ffff;
+$ballColor3 : #fe8062;
+
+
+
+
+.loadingContainer{
+    width: 100%;
+    height: 100%;
+}
+
+
+.apiCall{
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+}
+
+
+.loadingDot {
+    min-width: 1em;
+    min-height: 1em;
+    // background: $pureWhite;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+
+
+@keyframes jump {
+    0% {transform: translateY(0em);}
+    40% {transform: translateY(-1em);}
+    80% {transform: translateY(0em);}
+    100% {transform: translateY(0em);}
+} 
+
+
+.ball01{
+    background: $ballColor1;
+    animation: jump 1s ease-in-out 0.25s infinite;
+}
+
+.ball02{
+    background: $ballColor2;
+    animation: jump 1s ease-in-out 0.50s infinite;
+}
+
+.ball03{
+    background: $ballColor3;
+    animation: jump 1s ease-in-out 0.75s infinite;
+}
+
