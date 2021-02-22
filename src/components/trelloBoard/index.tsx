@@ -1,13 +1,17 @@
+import { useEffect, useState } from 'react'
 
 import styles from './trello_board.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { AddNewTask, TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
 import { Card, IProps } from './interfaces'
-import { useEffect, useState } from 'react'
+
+import fetchData from '../../factories/hitAPIs'
+
 import Modal from '../modal'
 import loadScripts from '../../factories/loadScripts'
 import Task from '../task'
+import urls from '../../lib/urls'
 
 
 
@@ -54,6 +58,8 @@ const Cards = ({ cardsList }: { cardsList: Card[] }) => {
 
 const TrelloBoard = (props: IProps) => {
 
+    const trelloKey = 'ffb9322b726e5e17b0eac594b73dc931'
+
     const [ showTaskModal, setShowTaskModal ] = useState(false)
     const [ showAuthModal, setShowAuthModal ] = useState(
         !localStorage.trello_token
@@ -66,16 +72,29 @@ const TrelloBoard = (props: IProps) => {
         await loadScripts(document, 'https://code.jquery.com/jquery-3.3.1.min.js')
         // Auth-ing using clientJS 
         // #see https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
-        await loadScripts(document, 'https://trello.com/1/client.js?key=ffb9322b726e5e17b0eac594b73dc931')
+        await loadScripts(document, `https://trello.com/1/client.js?key=${ trelloKey }`)
 
 
-        const authenticationSuccess = () => {
-            console.log('Successful authentication')
+        const authenticationSuccess = async () => {
+            // console.log('Successful authentication')
             setShowAuthModal(false)
+
+
+            // console.log(auth)
+            await fetchData(
+                `${urls.GET_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
+                {
+                    method: 'get'
+                }
+            )
+
+            .then((res) => {
+                console.log(res)
+            })
         }
 
         const authenticationFailure = () => {
-            console.log('Failed authentication')
+            // console.log('Failed authentication')
             setShowAuthModal(true)
         }
 
@@ -105,9 +124,10 @@ const TrelloBoard = (props: IProps) => {
     useEffect(() => {
 
         const checkForAuth = async () => {
-            const auth = await configureTrello(document, false)
+            await configureTrello(document, false)
 
-            // console.log(auth)
+           
+
         }
 
         checkForAuth()
@@ -160,11 +180,11 @@ const TrelloBoard = (props: IProps) => {
             </div>
 
             {
-                showTaskModal && (<Modal closeModal={setShowTaskModal} children={<Task />} />)
+                showTaskModal && (<Modal modalCloses={{ closeModal: setShowTaskModal}} children={<Task />} />)
             }
 
             {
-                showAuthModal && (<Modal closeModal={setShowAuthModal} children={
+                showAuthModal && (<Modal children={
                     <div className={`${utilStyles.flexCol_Centre}`}>
                         <h1 className={`text-3xl text-white text-center`}>Hi! To see your Trello board, <br/> please authorize this application.</h1>
 

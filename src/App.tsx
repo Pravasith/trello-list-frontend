@@ -160,20 +160,7 @@ const data: IProps = {
 }
 
 
-const TrelloAuth = () => {
 
-	useEffect(() => {
-		window.open('/trello-board', '_self')
-	}, [])
-
-	return (
-		<div className={`${utilStyles.flexCol_Centre} bg-black`}>
-			<h1>Please wait while we redirect you to home. If it doesn't automatically redirect, please</h1>
-			<a href="/">click here.</a>
-			{/* <Redirect to="/trello-board"/> */}
-		</div>
-	)
-}
 
 const Home = () => (
 
@@ -189,9 +176,9 @@ const Home = () => (
 
 		<footer
 			className={`${utilStyles.flexRow_Centre} ${utilStyles.posAbs_NW}`}
-		>
+			>
 			Designed and developed by Pravasith.
-			</footer>
+		</footer>
 
 
 	</div>
@@ -200,20 +187,16 @@ const Home = () => (
 
 const App = () => {
 
-	
-
-
-	
 
 	return (
 
+		// For this, there is no need for a Router since
+		// this is literally a single page application,
+		// but I've used it anyway for best practices.
 		<Router>
 			<Switch>
-				<Route path="/trello-board">
-					<Home />
-				</Route>
 				<Route path="/">
-					<TrelloAuth />
+					<Home />
 				</Route>
 			</Switch>
 
