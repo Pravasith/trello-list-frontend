@@ -1,7 +1,8 @@
 
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
+
 import { CloseButton } from "../../icons/common"
 
 import utilStyles from '../../styles/libs/utils.module.scss'
@@ -31,8 +32,11 @@ const Modal = (
         "task-description": ''
     })
 
+
     const validateAndSubmit = () => {
         // Validates the form and submits
+
+        setShowError(false)
 
         if(
             titleText['task-title'] !== '' &&

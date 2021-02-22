@@ -6,8 +6,10 @@ import styles from './styles/app.module.scss'
 import utilStyles from './styles/libs/utils.module.scss'
 
 import './styles/libs/global.scss'
-import TrelloBoard from './components/trelloBoard'
+
+
 import { IProps } from './components/trelloBoard/interfaces'
+import TrelloBoard from './components/trelloBoard'
 
 
 
@@ -159,7 +161,7 @@ const App = () => {
 			</header>
 
 			<div className={`${styles.childrenBody} ${utilStyles.flexRow_Centre}`}>
-				<TrelloBoard { ...data } />
+				<TrelloBoard { ...data }/>
 			</div>
 
 

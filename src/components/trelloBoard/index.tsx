@@ -4,9 +4,9 @@ import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { AddNewTask, TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
 import { Card, IProps } from './interfaces'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '../modal'
-
+import loadScripts from '../../factories/loadScripts'
 
 
 
@@ -53,8 +53,55 @@ const Cards = ({ cardsList }: { cardsList: Card[] }) => {
 
 const TrelloBoard = (props: IProps) => {
 
-    const [showModal, setShowModal] = useState(false)
+    const [showTaskModal, setShowTaskModal] = useState(false)
+
     
+    // const loadedClientJS = useScript()
+
+
+    useEffect(() => {
+
+        const configureTrello = async () => {
+
+            // JQuery
+            await loadScripts(document, 'https://code.jquery.com/jquery-3.3.1.min.js')
+            // Auth-ing using clientJS 
+            // #see https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
+            await loadScripts(document, 'https://trello.com/1/client.js?key=ffb9322b726e5e17b0eac594b73dc931')
+
+
+            const authenticationSuccess = (x: any) => {
+                console.log('Successful authentication', x)
+            }
+
+            const authenticationFailure = () => {
+                console.log('Failed authentication')
+            }
+
+
+            interface IWindow extends Window {
+                Trello?: any
+            }
+
+            (window as IWindow).Trello.authorize(
+                {
+                    type: 'redirect',
+                    name: 'Getting Started Application',
+                    scope: {
+                        read: 'true',
+                        write: 'true'
+                    },
+                    // expiration: 'never',
+                    success: authenticationSuccess,
+                    error: authenticationFailure
+                }
+            )
+
+        }
+
+        configureTrello()
+    }, [])
+
     return (
         <>
            
@@ -74,7 +121,7 @@ const TrelloBoard = (props: IProps) => {
                             <h2 className={`text-lg text-fl-blue font-medium`}>Todos</h2>
                             <button 
                                 className={`${utilStyles.roundSVGButton}`}
-                                onClick={() => setShowModal(true)}
+                                onClick={() => setShowTaskModal(true)}
                                 >
                                 <AddNewTask />
                             </button>
@@ -102,7 +149,7 @@ const TrelloBoard = (props: IProps) => {
             </div>
 
             {
-                showModal && (<Modal closeModal={setShowModal} />)
+                showTaskModal && (<Modal closeModal={setShowTaskModal} />)
             }
         </>
     )
