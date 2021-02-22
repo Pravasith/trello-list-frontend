@@ -8,8 +8,9 @@ export const APIS = {
 
 export default {
     // GET
-    GET_TRELLO_BOARD: APIS.BOARD + '/get-board'
+    GET_TRELLO_BOARD: APIS.BOARD + '/get-board',
     // POST
+    CREATE_TRELLO_BOARD: APIS.BOARD + '/create-board',
     // PUT
     // DELETE
 }

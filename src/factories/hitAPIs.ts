@@ -2,12 +2,12 @@
 
 export interface fetchOptions {
     method: 'get' | 'put' | 'post' | 'delete'
-    body?: string
-    headers?: string[][] | { [key: string]: string; }
+    body?: Body
+    headers?: string[][] | { [key: string]: string } | Headers
 }
 
 
-const fetchData = (url: string, options: fetchOptions) => {
+const fetchData = (url: string, options: RequestInit) => {
     const { method } = options
 
     if(method === 'get') return handleGET(url, options)
@@ -17,7 +17,7 @@ const fetchData = (url: string, options: fetchOptions) => {
 }
 
 
-const handlePOST = <T>(url: string, options: fetchOptions): Promise<T>=> {
+const handlePOST = <T>(url: string, options: RequestInit): Promise<T>=> {
     return fetch(
             url,
             options
@@ -25,7 +25,7 @@ const handlePOST = <T>(url: string, options: fetchOptions): Promise<T>=> {
         .then((res) => res.json() as Promise<T>)
 }
 
-const handleGET = <T>(url: string, options: fetchOptions): Promise<T>=> {
+const handleGET = <T>(url: string, options: RequestInit): Promise<T>=> {
     return fetch(
             url,
             options

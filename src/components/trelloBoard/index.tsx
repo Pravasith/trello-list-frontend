@@ -84,7 +84,18 @@ const TrelloBoard = (props: IProps) => {
             await fetchData(
                 `${urls.GET_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
                 {
-                    method: 'get'
+                    method: 'get',
+                }
+            )
+
+            .then((res) => {
+                console.log(res)
+            })
+
+            await fetchData(
+                `${urls.CREATE_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}&name=pravas-board`,
+                {
+                    method: 'post'
                 }
             )
 
@@ -125,9 +136,6 @@ const TrelloBoard = (props: IProps) => {
 
         const checkForAuth = async () => {
             await configureTrello(document, false)
-
-           
-
         }
 
         checkForAuth()
