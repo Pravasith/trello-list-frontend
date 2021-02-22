@@ -1,4 +1,12 @@
 
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+	Redirect
+} from "react-router-dom" 
+
 
 import Navbar from './components/navbar'
 
@@ -10,6 +18,7 @@ import './styles/libs/global.scss'
 
 import { IProps } from './components/trelloBoard/interfaces'
 import TrelloBoard from './components/trelloBoard'
+import { useEffect } from "react"
 
 
 
@@ -150,29 +159,65 @@ const data: IProps = {
 	]
 }
 
-const App = () => {
 
+const TrelloAuth = () => {
 
+	useEffect(() => {
+		window.open('/trello-board', '_self')
+	}, [])
 
 	return (
-		<div className={`${styles.container} ${utilStyles.posRel}`}>
-			<header className="App-header">
-				<Navbar/>
-			</header>
+		<div className={`${utilStyles.flexCol_Centre} bg-black`}>
+			<h1>Please wait while we redirect you to home. If it doesn't automatically redirect, please</h1>
+			<a href="/">click here.</a>
+			{/* <Redirect to="/trello-board"/> */}
+		</div>
+	)
+}
 
-			<div className={`${styles.childrenBody} ${utilStyles.flexRow_Centre}`}>
-				<TrelloBoard { ...data }/>
-			</div>
+const Home = () => (
+
+	<div className={`${styles.container} ${utilStyles.posRel}`}>
+		<header className="App-header">
+			<Navbar />
+		</header>
+
+		<div className={`${styles.childrenBody} ${utilStyles.flexRow_Centre}`}>
+			<TrelloBoard {...data} />
+		</div>
 
 
-			<footer
-				className={`${utilStyles.flexRow_Centre} ${utilStyles.posAbs_NW}`}
-				>
-				Designed and developed by Pravasith.
+		<footer
+			className={`${utilStyles.flexRow_Centre} ${utilStyles.posAbs_NW}`}
+		>
+			Designed and developed by Pravasith.
 			</footer>
 
 
-		</div>
+	</div>
+
+)
+
+const App = () => {
+
+	
+
+
+	
+
+	return (
+
+		<Router>
+			<Switch>
+				<Route path="/trello-board">
+					<Home />
+				</Route>
+				<Route path="/">
+					<TrelloAuth />
+				</Route>
+			</Switch>
+
+		</Router>
 	)
 }
 
