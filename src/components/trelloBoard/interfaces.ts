@@ -11,6 +11,18 @@ export type Card = {
     description?: string,
 }
 
+
+export interface ITrelloList {
+    name: string
+    id: string
+}
+
+export interface ITrelloBoard {
+    name: string
+    id: string
+    lists?: ITrelloList[]
+}
+
 export interface IProps {
     todos: Card[],
     done: Card[]

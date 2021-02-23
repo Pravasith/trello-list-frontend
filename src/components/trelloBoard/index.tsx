@@ -4,7 +4,7 @@ import styles from './trello_board.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
 import { AddNewTask, TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
-import { Card, IProps } from './interfaces'
+import { Card, IProps, ITrelloBoard, ITrelloList } from './interfaces'
 
 import fetchData from '../../factories/hitAPIs'
 
@@ -64,6 +64,88 @@ const TrelloBoard = (props: IProps) => {
     const [ showAuthModal, setShowAuthModal ] = useState(
         !localStorage.trello_token
     )
+    const [ board, setBoard ] = useState<ITrelloBoard>(
+        {
+            name: 'Trello Board',
+            id: ''
+        }
+    )
+
+    useEffect(() => {
+        console.log(board)
+    }, [board])
+
+    const authenticationSuccess = async () => {
+        setShowAuthModal(false)
+
+        let boardData = {
+            ...board
+        }
+
+        // Get a board named 'pravas-board' (creates the board if it doesn't exist)
+        await fetchData(
+            `${urls.GET_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
+            {
+                method: 'get',
+            }
+        )
+        .then((res) => {
+            type IRes = {
+                pravasBoard: ITrelloBoard
+            }
+
+            const responseData = res as IRes
+            const { name, id } = responseData.pravasBoard
+
+            boardData = {
+                ...boardData,
+                name,
+                id
+            }
+
+        })
+        .catch(e => console.error(e))
+
+        // Get lists in the board 'pravas-board'
+        await fetchData(
+            `${urls.GET_LISTS_IN_BOARD}?boardId=${boardData.id}&trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
+            {
+                method: 'get',
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                // body: JSON.stringify({})
+            }
+        )
+        .then(res => {
+            type IRes = {
+                listsInPravasBoard: ITrelloList[]
+            }
+
+            const responseData = res as IRes
+            const lists = responseData.listsInPravasBoard
+                            .map(item => ({
+                                name: item.name,
+                                id: item.id
+                            }))
+                            .filter(item => item.name !== 'Doing')
+
+            boardData = {
+                ...boardData,
+                lists
+            }
+
+            setBoard(boardData)
+        })
+        .catch(e => console.error(e))
+
+    }
+
+    const authenticationFailure = () => {
+        // console.log('Failed authentication')
+        setShowAuthModal(true)
+    }
 
 
     const configureTrello = async (document: Document, firstTime?: boolean) => {
@@ -73,42 +155,6 @@ const TrelloBoard = (props: IProps) => {
         // Auth-ing using clientJS 
         // #see https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
         await loadScripts(document, `https://trello.com/1/client.js?key=${ trelloKey }`)
-
-
-        const authenticationSuccess = async () => {
-            // console.log('Successful authentication')
-            setShowAuthModal(false)
-
-
-            // console.log(auth)
-            await fetchData(
-                `${urls.GET_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
-                {
-                    method: 'get',
-                }
-            )
-
-            .then((res) => {
-                console.log(res)
-            })
-
-            await fetchData(
-                `${urls.CREATE_TRELLO_BOARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}&name=pravas-board`,
-                {
-                    method: 'post'
-                }
-            )
-
-            .then((res) => {
-                console.log(res)
-            })
-        }
-
-        const authenticationFailure = () => {
-            // console.log('Failed authentication')
-            setShowAuthModal(true)
-        }
-
 
         interface IWindow extends Window {
             Trello?: any
@@ -150,7 +196,7 @@ const TrelloBoard = (props: IProps) => {
                         <TrelloLogo/>
                     </div>
 
-                    <h2 className={`text-lg text-fl-blue`}>Trello board</h2>
+                    <h2 className={`text-lg text-fl-blue font-medium`}>{ board.name }</h2>
                 </div>
 
                 <div className={`my-8 ${utilStyles.flexRow_N}`}>
