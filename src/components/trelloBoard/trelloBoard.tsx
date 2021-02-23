@@ -144,7 +144,7 @@ const TrelloBoard = () => {
         }
 
         checkForAuth()
-    }, [configureTrello])
+    }, [])
 
     return (
         <>
