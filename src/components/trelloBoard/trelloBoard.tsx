@@ -208,7 +208,7 @@ const TrelloBoard = () => {
             </div>
 
             {
-                showTaskModal && (<Modal modalCloses={{ closeModal: setShowTaskModal }} children={<Task />} />)
+                showTaskModal && (<Modal modalCloses={{ closeModal: () => setShowTaskModal(false) }} children={<Task/>} />)
             }
 
             {

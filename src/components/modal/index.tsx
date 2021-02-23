@@ -1,6 +1,6 @@
 
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { CloseButton } from "../../icons/common"
 
@@ -10,18 +10,16 @@ import utilStyles from '../../styles/libs/utils.module.scss'
 
 import styles from './modal.module.scss'
 
-const Modal = (
+const Modal = React.memo((
     props: {
         modalCloses?: {
-            closeModal: React.Dispatch<React.SetStateAction<boolean>>,
+            closeModal: () => void,
         }
         children: React.ReactChild
     }
 ) => {
 
 
-
-  
     return (
         <div className={`fixed top-0 left-0 w-full h-screen ${styles.container}`}>
             <div className="relative w-full h-full">
@@ -29,7 +27,7 @@ const Modal = (
                     props.modalCloses && (
                         <button
                             className={`absolute top-0 right-0 w-10 h-10 m-6 ${utilStyles.roundSVGButton}`}
-                            onClick={() => props.modalCloses && props.modalCloses.closeModal(false)}
+                            onClick={() => props.modalCloses && props.modalCloses.closeModal()}
                         >
                             <CloseButton />
                         </button>
@@ -48,6 +46,6 @@ const Modal = (
             </div>
         </div>
     )
-}
+})
 
 export default Modal

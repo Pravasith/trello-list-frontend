@@ -7,7 +7,7 @@ import TrelloBoard from './trelloBoard'
 
 
 
-interface IContextProps {
+export interface IContextProps {
     GlobalState: ITrelloBoard;
     dispatch: (
         { type, payload }: {

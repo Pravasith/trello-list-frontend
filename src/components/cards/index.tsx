@@ -1,14 +1,21 @@
 
+import { useContext, useState } from 'react'
+
+
 import styles from './cards.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
+
+import { Loader } from '../loader'
+
 import { ITrelloCard } from '../trelloBoard/interfaces'
 import { TickMark, TimeLeft } from '../../icons/common'
+
 import ConvertDate from '../../factories/convertDate'
 import fetchData from '../../factories/hitAPIs'
-import urls from '../../lib/urls'
-import { useContext, useState } from 'react'
+
 import { BoardContext } from '../trelloBoard'
-import { Loader } from '../loader'
+
+import urls from '../../lib/urls'
 
 
 

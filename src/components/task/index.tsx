@@ -16,6 +16,8 @@ const Task = () => {
     const { GlobalState, dispatch } = boardContext
 
     const [showError, setShowError] = useState(false)
+    const [showSuccess, setShowSuccess] = useState(false)
+
     const [showLoading, setShowLoading] = useState(false)
 
     const [startDate, setStartDate] = useState<null | Date>(null)
@@ -25,9 +27,8 @@ const Task = () => {
         "task-description": ''
     }
 
-    const [titleText, handleTitleChange] = useForm(initState)
-
-    const [descText, handleDescChange] = useForm(initState)
+    const [ titleText, handleTitleChange ] = useForm(initState)
+    const [ descText, handleDescChange ] = useForm(initState)
 
 
     const validateAndSubmit = async () => {
@@ -69,11 +70,8 @@ const Task = () => {
                     addedCard: ITrelloCard
                 }
 
-                // const responseData = res as IRes
-                // const { name, id } = responseData.pravasBoard
-
-                // console.log(res)
                 setShowLoading(false)
+                setShowSuccess(true)
 
                 dispatch({
                     type: 'UPDATE_BOARD',
@@ -95,15 +93,25 @@ const Task = () => {
         }
     }
 
+
+    if(showSuccess){
+        return <h2 className="text-3xl p-2 py-1 mb-2 rounded-md text-white">Successfully added task</h2>
+    }
+
+
+    else
     return (
 
         <div className={`${utilStyles.flexCol_Centre} py-4`}>
+
             <h1 className="text-3xl pb-3">Add your task</h1>
             {
                 showError && (
                     <h2 className="text-1xl p-2 py-1 mb-2 rounded-md text-white bg-red-500">All fields are mandatory</h2>
                 )
             }
+
+            
 
             {
                 showLoading && <Loader />
