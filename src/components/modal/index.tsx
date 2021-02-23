@@ -1,6 +1,6 @@
 
 
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 
 import { CloseButton } from "../../icons/common"
 

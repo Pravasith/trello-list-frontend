@@ -1,5 +1,5 @@
 
-export const be = 'http://localhost:8000'
+export const be = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://trello-epilot.herokuapp.com/'
 
 export const baseAPI = be + '/api'
 export const APIS = {
@@ -7,7 +7,7 @@ export const APIS = {
     LIST: baseAPI + '/lists'
 }
 
-export default {
+const urls = {
     // GET
     GET_TRELLO_BOARD: APIS.BOARD + '/get-board',
     GET_LISTS_IN_BOARD: APIS.BOARD + '/get-lists',
@@ -21,5 +21,7 @@ export default {
     UPDATE_A_CARD: APIS.LIST + '/update-card',
 
     // DELETE
-    
+
 }
+
+export default urls

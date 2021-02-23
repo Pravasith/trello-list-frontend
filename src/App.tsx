@@ -3,8 +3,6 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link,
-	Redirect
 } from "react-router-dom" 
 
 
@@ -16,9 +14,7 @@ import utilStyles from './styles/libs/utils.module.scss'
 import './styles/libs/global.scss'
 
 
-import { IProps } from './components/trelloBoard/interfaces'
 import TrelloBoard from './components/trelloBoard'
-import { useEffect } from "react"
 
 
 

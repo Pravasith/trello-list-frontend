@@ -5,7 +5,7 @@ import urls from '../../lib/urls'
 import utilStyles from '../../styles/libs/utils.module.scss'
 import { Loader } from '../loader'
 import { BoardContext } from '../trelloBoard'
-import { ITrelloBoard, ITrelloCard } from '../trelloBoard/interfaces'
+import { ITrelloCard } from '../trelloBoard/interfaces'
 import { useForm } from '../useForm'
 
 // MARK

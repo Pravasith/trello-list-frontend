@@ -8,7 +8,7 @@ import TrelloBoard from './trelloBoard'
 
 
 export interface IContextProps {
-    GlobalState: ITrelloBoard;
+    GlobalState: ITrelloBoard
     dispatch: (
         { type, payload }: {
             type: string,
@@ -42,7 +42,6 @@ export const trelloReducer = (
                 ...state,
                 ...action.payload
             }
-            break
 
         default:
             return state

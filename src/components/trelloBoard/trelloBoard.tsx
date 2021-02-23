@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './trello_board.module.scss'
 import utilStyles from '../../styles/libs/utils.module.scss'
 
-import { AddNewTask, AddToDo, MarkDone, TickMark, TimeLeft, TrelloLogo } from '../../icons/common'
-import { Card, IProps, ITrelloBoard, ITrelloCard, ITrelloList } from './interfaces'
+import { AddNewTask, AddToDo, MarkDone, TrelloLogo } from '../../icons/common'
+import { ITrelloBoard, ITrelloCard } from './interfaces'
 
 import fetchData from '../../factories/hitAPIs'
 
@@ -144,7 +144,7 @@ const TrelloBoard = () => {
         }
 
         checkForAuth()
-    }, [])
+    }, [configureTrello])
 
     return (
         <>
