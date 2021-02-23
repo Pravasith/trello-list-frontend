@@ -144,6 +144,8 @@ const TrelloBoard = () => {
         }
 
         checkForAuth()
+
+        // eslint-disable-line react-hooks/exhaustive-deps
     }, [])
 
     return (
