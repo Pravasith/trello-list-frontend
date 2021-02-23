@@ -7,8 +7,18 @@ export type Card = {
     title: string,
     id: string,
 
-    dueDate?: Date,
-    description?: string,
+    dueDate: Date,
+    description: string,
+}
+
+
+export interface ITrelloCard {
+    name: string
+    desc: string
+    id: string
+    due: Date
+    idList: string
+    type: 'TODO' | 'DONE'
 }
 
 
@@ -20,6 +30,9 @@ export interface ITrelloList {
 export interface ITrelloBoard {
     name: string
     id: string
+    todoCards: ITrelloCard[]
+    doneCards: ITrelloCard[]
+
     lists?: ITrelloList[]
 }
 

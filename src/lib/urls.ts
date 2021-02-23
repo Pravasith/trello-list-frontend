@@ -11,8 +11,13 @@ export default {
     // GET
     GET_TRELLO_BOARD: APIS.BOARD + '/get-board',
     GET_LISTS_IN_BOARD: APIS.BOARD + '/get-lists',
-    // POST
+    GET_CARDS_IN_BOARD: APIS.BOARD + '/get-cards',
     CREATE_TRELLO_BOARD: APIS.BOARD + '/create-board',
+
+    // POST
+    ADD_NEW_CARD: APIS.LIST + '/add-card',
+
     // PUT
+
     // DELETE
 }

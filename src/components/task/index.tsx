@@ -1,26 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
 import utilStyles from '../../styles/libs/utils.module.scss'
 import { Loader } from '../loader'
+import { BoardContext } from '../trelloBoard'
+import { ITrelloCard } from '../trelloBoard/interfaces'
 import { useForm } from '../useForm'
 
 // MARK
 
 const Task = () => {
 
+    const boardContext = useContext(BoardContext)
+    const { dispatch } = boardContext
+
     const [showError, setShowError] = useState(false)
     const [showLoading, setShowLoading] = useState(false)
 
     const [startDate, setStartDate] = useState<null | Date>(null)
 
-
-    const [titleText, handleTitleChange] = useForm({
-        "task-title": ''
-    })
-
-    const [descText, handleDescChange] = useForm({
+    const initState = {
+        "task-title": '',
         "task-description": ''
-    })
+    }
+
+    const [titleText, handleTitleChange] = useForm(initState)
+
+    const [descText, handleDescChange] = useForm(initState)
 
 
     const validateAndSubmit = () => {
@@ -34,9 +39,12 @@ const Task = () => {
             startDate !== null
         ) {
             const data = {
-                title: titleText['task-title'],
-                description: descText['task-description'],
-                dueDate: startDate
+                name: titleText['task-title'],
+                desc: descText['task-description'],
+                due: startDate.toISOString(),
+                id: '',
+                idList: '',
+                type: 'TODO'
             }
 
 
@@ -45,6 +53,12 @@ const Task = () => {
             let x = setTimeout(() => {
                 clearTimeout(x)
                 console.log(data)
+
+                dispatch({
+                    type: 'UPDATE_BOARD',
+                    payload: data
+                })
+                
 
                 setShowLoading(false)
             }, 2000)

@@ -2,8 +2,8 @@ import { useState, ChangeEvent } from "react"
 
 
 interface InputValues {
-    'task-title'?: string,
-    'task-description'?: string
+    'task-title': string,
+    'task-description': string
 }
 
 

@@ -7,7 +7,7 @@
     $trelloGreen: rgba(51, 255, 0, 0.252);
 
     .listItem{
-        width: 220px;
+        min-width: 150px;
     }
 
     .card{
@@ -50,15 +50,6 @@
     .scrollWrap{
         overflow-y: auto;
         max-height: 45vh;
-        min-width: 300px;
-    }
-
-    .bgdImageWrap{
-        width: 90px;
-    }
-
-    .bgdDone{
-        width: 110px;
     }
 
     .stick{
