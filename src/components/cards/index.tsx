@@ -43,20 +43,43 @@ const Cards = ({ cardsList }: { cardsList: ITrelloCard[] }) => {
                 updatedCard: ITrelloCard
             }
 
-            // const responseData = res as IRes
-            // const { name, id } = responseData.pravasBoard
+            const responseData = res as IRes
+            let payload
 
-            console.log(res)
+            if(card.type === 'TODO'){
+                payload = {
+                    doneCards: [
+                        ...GlobalState.doneCards,
+                        {
+                            ...responseData.updatedCard,
+                            type: 'DONE'
+                        }
+                    ],
+                    todoCards: [
+                        ...GlobalState.todoCards.filter(c => c.id !== card.id)
+                    ]
+                }
+            }
 
-            // dispatch({
-            //     type: 'UPDATE_BOARD',
-            //     payload: {
-            //         todoCards: [
-            //             ...GlobalState.todoCards,
-            //             (res as IRes).updatedCard
-            //         ]
-            //     }
-            // })
+            else if (card.type === 'DONE') {
+                payload = {
+                    todoCards: [
+                        ...GlobalState.todoCards,
+                        {
+                            ...responseData.updatedCard,
+                            type: 'TODO'
+                        }
+                    ],
+                    doneCards: [
+                        ...GlobalState.doneCards.filter(c => c.id !== card.id)
+                    ]
+                }
+            }
+
+            dispatch({
+                type: 'UPDATE_BOARD',
+                payload 
+            })
 
         })
         .catch(e => console.error(e))
