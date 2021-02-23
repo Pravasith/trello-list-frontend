@@ -33,6 +33,9 @@ export interface ITrelloBoard {
     todoCards: ITrelloCard[]
     doneCards: ITrelloCard[]
 
+    todoId?: string
+    doneId?: string
+
     lists?: ITrelloList[]
 }
 

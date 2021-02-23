@@ -18,6 +18,8 @@ export default {
     ADD_NEW_CARD: APIS.LIST + '/add-card',
 
     // PUT
+    UPDATE_A_CARD: APIS.LIST + '/update-card',
 
     // DELETE
+    
 }

@@ -22,23 +22,21 @@ import { BoardContext } from '.'
 
 const TrelloBoard = () => {
 
-    const trelloKey = 'ffb9322b726e5e17b0eac594b73dc931'
+    const trelloKey = process.env.REACT_APP_PRAVAS_MY_TRELLO_KEY
+
 
     const [showTaskModal, setShowTaskModal] = useState(false)
     const [showAuthModal, setShowAuthModal] = useState(
         !localStorage.trello_token
     )
-    // const [board, setBoard] = useState<ITrelloBoard>(
-    //     {
-    //         name: 'Trello Board',
-    //         id: '',
-    //         todoCards: [],
-    //         doneCards: []
-    //     }
-    // )
+
 
     const boardContext = useContext(BoardContext)
     const { GlobalState, dispatch } = boardContext
+
+    // useEffect(() => {
+    //     console.log(GlobalState)
+    // }, [GlobalState])
 
 
     const authenticationSuccess = async () => {
@@ -55,56 +53,51 @@ const TrelloBoard = () => {
                 method: 'get',
             }
         )
-            .then((res) => {
-                type IRes = {
-                    pravasBoard: ITrelloBoard
-                }
+        .then((res) => {
+            type IRes = {
+                pravasBoard: ITrelloBoard
+            }
 
-                const responseData = res as IRes
-                const { name, id } = responseData.pravasBoard
+            const responseData = res as IRes
+            const { name, id } = responseData.pravasBoard
 
-                boardData = {
-                    ...boardData,
-                    name,
-                    id
-                }
+            boardData = {
+                ...boardData,
+                name,
+                id
+            }
 
-            })
-            .catch(e => console.error(e))
+        })
+        .catch(e => console.error(e))
 
         // Get lists in the board 'pravas-board'
         await fetchData(
             `${urls.GET_CARDS_IN_BOARD}?boardId=${boardData.id}&trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
             {
                 method: 'get',
-                // headers: {
-                //     'Accept': 'application/json',
-                //     'Content-Type': 'application/json'
-                // },
-                // body: JSON.stringify({})
             }
         )
-            .then(res => {
+        .then(res => {
 
-                const responseData = res as {
-                    todoCards: ITrelloCard[],
-                    doneCards: ITrelloCard[]
-                }
+            const responseData = res as {
+                todoCards: ITrelloCard[],
+                doneCards: ITrelloCard[]
+            }
 
-                boardData = {
-                    ...boardData,
-                    ...responseData
-                }
+            boardData = {
+                ...boardData,
+                ...responseData
+            }
 
-                // setBoard(boardData)
+            // setBoard(boardData)
 
-                dispatch({
-                    type: 'UPDATE_BOARD',
-                    payload: boardData
-                })
-
+            dispatch({
+                type: 'UPDATE_BOARD',
+                payload: boardData
             })
-            .catch(e => console.error(e))
+
+        })
+        .catch(e => console.error(e))
 
     }
 
@@ -198,13 +191,13 @@ const TrelloBoard = () => {
                         <div className={`${styles.scrollWrap} ${utilStyles.flexCol_N}`}>
                             {
                                 GlobalState.doneCards.length === 0
-                                    ?
-                                    <div className={`${styles.bgdImageWrap} ${styles.bgdDone}`}>
-                                        <MarkDone />
-                                    </div>
-                                    :
-                                    // <Cards cardsList={props.todos} />
-                                    <Cards cardsList={GlobalState.doneCards} />
+                                ?
+                                <div className={`${styles.bgdImageWrap} ${styles.bgdDone}`}>
+                                    <MarkDone />
+                                </div>
+                                :
+                                // <Cards cardsList={props.todos} />
+                                <Cards cardsList={GlobalState.doneCards} />
 
                             }
                         </div>

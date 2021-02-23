@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
+import fetchData from '../../factories/hitAPIs'
+import urls from '../../lib/urls'
 import utilStyles from '../../styles/libs/utils.module.scss'
 import { Loader } from '../loader'
 import { BoardContext } from '../trelloBoard'
-import { ITrelloCard } from '../trelloBoard/interfaces'
+import { ITrelloBoard, ITrelloCard } from '../trelloBoard/interfaces'
 import { useForm } from '../useForm'
 
 // MARK
@@ -11,7 +13,7 @@ import { useForm } from '../useForm'
 const Task = () => {
 
     const boardContext = useContext(BoardContext)
-    const { dispatch } = boardContext
+    const { GlobalState, dispatch } = boardContext
 
     const [showError, setShowError] = useState(false)
     const [showLoading, setShowLoading] = useState(false)
@@ -28,7 +30,7 @@ const Task = () => {
     const [descText, handleDescChange] = useForm(initState)
 
 
-    const validateAndSubmit = () => {
+    const validateAndSubmit = async () => {
         // Validates the form and submits
 
         setShowError(false)
@@ -42,26 +44,50 @@ const Task = () => {
                 name: titleText['task-title'],
                 desc: descText['task-description'],
                 due: startDate.toISOString(),
-                id: '',
-                idList: '',
-                type: 'TODO'
             }
 
 
             setShowLoading(true)
+            const trelloKey = process.env.REACT_APP_PRAVAS_MY_TRELLO_KEY
 
-            let x = setTimeout(() => {
-                clearTimeout(x)
-                console.log(data)
+            await fetchData(
+                `${urls.ADD_NEW_CARD}?trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
+                {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        listId: GlobalState.todoId,
+                        data
+                    })
+                }
+            )
+            .then((res) => {
+                type IRes = {
+                    addedCard: ITrelloCard
+                }
+
+                // const responseData = res as IRes
+                // const { name, id } = responseData.pravasBoard
+
+                // console.log(res)
+                setShowLoading(false)
 
                 dispatch({
                     type: 'UPDATE_BOARD',
-                    payload: data
+                    payload: {
+                        todoCards: [
+                            ...GlobalState.todoCards,
+                            (res as IRes).addedCard
+                        ]
+                    }
                 })
-                
 
-                setShowLoading(false)
-            }, 2000)
+            })
+            .catch(e => console.error(e))
+
         }
 
         else {

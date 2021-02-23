@@ -10,41 +10,55 @@
         min-width: 150px;
     }
 
-    .card{
-        
+    .card{        
         background: $intenseGray;
-        cursor: pointer;
         transition: 0.2s;
 
         &:hover{
             // .listItem{
             //     @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
             // }
-            
-            h1, p{
-                color: $pureWhite;
+            .tickMark{
+                background: $intenseGray;
+                border-color: $pureWhite;
+                transform: scale(1.2);
             }
+
         }
+    }
+
+    .tickMark{
+        border: 0.125em solid $intenseGray;
+        transition: 0.2s;
+    }
+
+    .tickMark-TODO{
+        
+        background: $lightGray;
+    }
+
+    .tickMark-DONE{
+        background: $lightGreen;
     }
 
     .blueColor{
         filter: drop-shadow(2px 4px 6px $trelloBlue);
-        &:hover{
-            // @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
-            filter: drop-shadow(0px 2px 8px $pureWhite);
-        }
+        // &:hover{
+        //     // @include backlight(2px, 4px, 6px, 6px, #7e0fff, #0fffc1, 3s);
+        //     filter: drop-shadow(0px 2px 8px $pureWhite);
+        // }
     }
 
     .greenColor{
         filter: drop-shadow(2px 4px 6px $trelloGreen);
-        &:hover{
-            // @include backlight(2px, 4px, 6px, 6px, #88ff00, #0fffc1, 3s);
-            filter: drop-shadow(0px 2px 8px $pureWhite);
-        }
+        // &:hover{
+        //     // @include backlight(2px, 4px, 6px, 6px, #88ff00, #0fffc1, 3s);
+        //     filter: drop-shadow(0px 2px 8px $pureWhite);
+        // }
     }
 
     .addTaskIcon{
-        width: 25px;
+        width: 30px;
     }
 
     .scrollWrap{
