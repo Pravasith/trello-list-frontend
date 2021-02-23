@@ -1,5 +1,5 @@
 
-export const be = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://trello-epilot.herokuapp.com/'
+export const be = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://trello-epilot.herokuapp.com'
 
 export const baseAPI = be + '/api'
 export const APIS = {
