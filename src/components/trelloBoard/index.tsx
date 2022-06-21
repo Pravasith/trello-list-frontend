@@ -1,46 +1,35 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer } from "react"
 
+import { ITrelloBoard } from "./interfaces"
 
-import { ITrelloBoard } from './interfaces'
-
-import TrelloBoard from './trelloBoard'
-
-
+import TrelloBoard from "./trelloBoard"
 
 export interface IContextProps {
     GlobalState: ITrelloBoard
-    dispatch: (
-        { type, payload }: {
-            type: string,
-            payload: any
-        }
-    ) => void
+    dispatch: ({ type, payload }: { type: string; payload: any }) => void
 }
 
 const initialState = {
-    name: 'Trello Board',
-    id: '',
+    name: "Trello Board",
+    id: "",
     todoCards: [],
-    doneCards: []
+    doneCards: [],
 }
 
-
 export const BoardContext = createContext({} as IContextProps)
-
 
 export const trelloReducer = (
     state: any,
     action: {
-        type: string,
+        type: string
         payload: any
     }
 ) => {
     switch (action.type) {
-        case 'UPDATE_BOARD':
-            // console.log(action.payload)
+        case "UPDATE_BOARD":
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
             }
 
         default:
@@ -49,21 +38,18 @@ export const trelloReducer = (
 }
 
 const Index = () => {
-
-    const [ state, dispatch ] = useReducer(trelloReducer, {
-        ...initialState
+    const [state, dispatch] = useReducer(trelloReducer, {
+        ...initialState,
     })
 
     return (
         <BoardContext.Provider
-            value={
-                {
-                    GlobalState: state,
-                    dispatch
-                }
-            }
-            >
-            <TrelloBoard/>
+            value={{
+                GlobalState: state,
+                dispatch,
+            }}
+        >
+            <TrelloBoard />
         </BoardContext.Provider>
     )
 }

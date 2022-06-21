@@ -1,16 +1,11 @@
-
-
-
-
 export type Card = {
-    type: 'TODO' | 'DONE',
-    title: string,
-    id: string,
+    type: "TODO" | "DONE"
+    title: string
+    id: string
 
-    dueDate: Date,
-    description: string,
+    dueDate: Date
+    description: string
 }
-
 
 export interface ITrelloCard {
     name: string
@@ -18,9 +13,8 @@ export interface ITrelloCard {
     id: string
     due: Date
     idList: string
-    type: 'TODO' | 'DONE'
+    type: "TODO" | "DONE"
 }
-
 
 export interface ITrelloList {
     name: string
@@ -40,6 +34,6 @@ export interface ITrelloBoard {
 }
 
 export interface IProps {
-    todos: Card[],
+    todos: Card[]
     done: Card[]
 }

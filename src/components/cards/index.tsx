@@ -1,27 +1,22 @@
+import { useContext, useState } from "react"
 
-import { useContext, useState } from 'react'
+import styles from "./cards.module.scss"
+import utilStyles from "../../styles/libs/utils.module.scss"
 
+import { Loader } from "../loader"
 
-import styles from './cards.module.scss'
-import utilStyles from '../../styles/libs/utils.module.scss'
+import { ITrelloCard } from "../trelloBoard/interfaces"
+import { TickMark, TimeLeft } from "../../icons/common"
 
-import { Loader } from '../loader'
+import ConvertDate from "../../factories/convertDate"
+import fetchData from "../../factories/hitAPIs"
 
-import { ITrelloCard } from '../trelloBoard/interfaces'
-import { TickMark, TimeLeft } from '../../icons/common'
+import { BoardContext } from "../trelloBoard"
 
-import ConvertDate from '../../factories/convertDate'
-import fetchData from '../../factories/hitAPIs'
-
-import { BoardContext } from '../trelloBoard'
-
-import urls from '../../lib/urls'
-
-
+import urls from "../../lib/urls"
 
 const Cards = ({ cardsList }: { cardsList: ITrelloCard[] }) => {
-
-    const [ showLoading, setShowLoading ] = useState(false)
+    const [showLoading, setShowLoading] = useState(false)
 
     const boardContext = useContext(BoardContext)
     const { GlobalState, dispatch } = boardContext
@@ -35,111 +30,120 @@ const Cards = ({ cardsList }: { cardsList: ITrelloCard[] }) => {
         await fetchData(
             `${urls.UPDATE_A_CARD}?id=${card.id}&trelloKey=${trelloKey}&trelloToken=${localStorage.trello_token}`,
             {
-                method: 'put',
+                method: "put",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    listId: card.type === 'TODO' ? GlobalState.doneId : GlobalState.todoId
-                })
+                    listId:
+                        card.type === "TODO"
+                            ? GlobalState.doneId
+                            : GlobalState.todoId,
+                }),
             }
         )
-        .then((res) => {
-            type IRes = {
-                updatedCard: ITrelloCard
-            }
-
-            const responseData = res as IRes
-            let payload
-
-            if(card.type === 'TODO'){
-                payload = {
-                    doneCards: [
-                        ...GlobalState.doneCards,
-                        {
-                            ...responseData.updatedCard,
-                            type: 'DONE'
-                        }
-                    ],
-                    todoCards: [
-                        ...GlobalState.todoCards.filter(c => c.id !== card.id)
-                    ]
+            .then(res => {
+                type IRes = {
+                    updatedCard: ITrelloCard
                 }
-            }
 
-            else if (card.type === 'DONE') {
-                payload = {
-                    todoCards: [
-                        ...GlobalState.todoCards,
-                        {
-                            ...responseData.updatedCard,
-                            type: 'TODO'
-                        }
-                    ],
-                    doneCards: [
-                        ...GlobalState.doneCards.filter(c => c.id !== card.id)
-                    ]
+                const responseData = res as IRes
+                let payload
+
+                if (card.type === "TODO") {
+                    payload = {
+                        doneCards: [
+                            ...GlobalState.doneCards,
+                            {
+                                ...responseData.updatedCard,
+                                type: "DONE",
+                            },
+                        ],
+                        todoCards: [
+                            ...GlobalState.todoCards.filter(
+                                c => c.id !== card.id
+                            ),
+                        ],
+                    }
+                } else if (card.type === "DONE") {
+                    payload = {
+                        todoCards: [
+                            ...GlobalState.todoCards,
+                            {
+                                ...responseData.updatedCard,
+                                type: "TODO",
+                            },
+                        ],
+                        doneCards: [
+                            ...GlobalState.doneCards.filter(
+                                c => c.id !== card.id
+                            ),
+                        ],
+                    }
                 }
-            }
 
-            dispatch({
-                type: 'UPDATE_BOARD',
-                payload 
+                dispatch({
+                    type: "UPDATE_BOARD",
+                    payload,
+                })
             })
-
-        })
-        .catch(e => console.error(e))
+            .catch(e => console.error(e))
 
         setShowLoading(false)
     }
 
     return (
         <div className={`${styles.container}`}>
-            {
-                showLoading && <Loader/>
-            }
+            {showLoading && <Loader />}
 
-            {
-                cardsList.map((item, i) => {
-                    return (
-                        <div
-                            className={`rounded-md px-4 py-2 m-4 ${styles.card} ${utilStyles.flexRow_W} ${item.type === 'TODO' ? styles.blueColor : styles.greenColor}`}
-                            key={`cardiA-${item.id}`}
-                        >
-                            {
-                                <button
-                                    className={`w-5 h-5 mr-3 rounded-full ${styles.tickMark} ${styles['tickMark-' + item.type]}`}
-                                    onClick={() => {
-                                        moveCard(item)
-                                    }}
-                                >
-                                    <TickMark />
-                                </button>
-                            }
-                            
-
-                            <p
-                                className={`text-fl-blue text-tiny font-medium mt-1.5 truncate ${styles.listItem}`}
+            {cardsList.map((item, i) => {
+                return (
+                    <div
+                        className={`rounded-md px-4 py-2 m-4 ${styles.card} ${
+                            utilStyles.flexRow_W
+                        } ${
+                            item.type === "TODO"
+                                ? styles.blueColor
+                                : styles.greenColor
+                        }`}
+                        key={`cardiA-${item.id}`}
+                    >
+                        {
+                            <button
+                                className={`w-5 h-5 mr-3 rounded-full ${
+                                    styles.tickMark
+                                } ${styles["tickMark-" + item.type]}`}
+                                onClick={() => {
+                                    moveCard(item)
+                                }}
                             >
-                                {item.name}
-                            </p>
+                                <TickMark />
+                            </button>
+                        }
 
-                            {
-                                !!item.due && (
-                                    <div className={` ${utilStyles.flexRow_Centre}`}>
-                                        <div className={`w-4 h-4 mr-2 rounded-full mx-1.5`}>
-                                            <TimeLeft intensity={'none'} />
-                                        </div>
+                        <p
+                            className={`text-fl-blue text-tiny font-medium mt-1.5 truncate ${styles.listItem}`}
+                        >
+                            {item.name}
+                        </p>
 
-                                        <p className={`text-tiny text-gray-500 mt-1.5`}>{ConvertDate(new Date(item.due))}</p>
-                                    </div>
-                                )
-                            }
-                        </div>
-                    )
-                })
-            }
+                        {!!item.due && (
+                            <div className={` ${utilStyles.flexRow_Centre}`}>
+                                <div
+                                    className={`w-4 h-4 mr-2 rounded-full mx-1.5`}
+                                >
+                                    <TimeLeft intensity={"none"} />
+                                </div>
+
+                                <p className={`text-tiny text-gray-500 mt-1.5`}>
+                                    {ConvertDate(new Date(item.due))}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                )
+            })}
         </div>
     )
 }
